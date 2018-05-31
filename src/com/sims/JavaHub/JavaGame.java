@@ -16,14 +16,59 @@ import javax.swing.JFrame;
  * @author simon_bens
  * Thread lessons on teacher du net and newboston
  */
-public class JavaGame extends JFrame{
+public class JavaGame extends JFrame implements Runnable{
 	
-	int x,y;
+	int x,y, xDirection, yDirection;
+	
+
 	//create a buffer image & graphics
 	private Image dbImage;
 	private Graphics dbGraphics;
 	Image face;
 	
+	//set run method for thread
+	//the speed of the main program
+	@Override
+	public void run() {
+		try {
+			//through a while loop we control how fast is the run method
+			while(true){
+				//ask constantly to check the move() method
+				move();
+				//ask to the run method to stop for millisecond
+				// it's kind of control of the speed compute of the program
+				// more > millisecond more the program is slow
+				Thread.sleep(100);
+				
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	//method update into the thread
+	public void move(){
+		//x & y move depend of xDirection/yDirection
+		x+= xDirection;
+		y+= yDirection;
+		
+		//collision detection
+		if(x <= 0)
+			x = 0;
+		if(x >=310)
+			x = 310;
+		if(y<= 20)
+			y = 20;
+		if(y >= 310)
+			y = 310;
+	}
+	//set xDirection/yDirection
+	public void setxDirection(int xDirection) {
+		this.xDirection = xDirection;
+	}
+	public void setyDirection(int yDirection) {
+		this.yDirection = yDirection;
+	}
 	
 	//action listener on keyboard
 	public class AL extends KeyAdapter{
@@ -31,40 +76,34 @@ public class JavaGame extends JFrame{
 			//stock the value of the button pressed
 			int keyCode = e.getKeyCode();
 			if(keyCode == e.VK_LEFT){
-				if(x <= 0){
-					x = 0;
-				}else{
-					//x and y start on haut à gauche
-					x+= -5;
-				}
-				
+				//move to left on x axe
+				setxDirection(-1);
 			}
 			if(keyCode == e.VK_RIGHT){
-				if(x >=310){
-					x = 310;
-				}else{
-					x+= +5;
-				}
-				
+				//move to right side
+				setxDirection(+1);	
 			}
 			if(keyCode == e.VK_UP){
-				if(y<= 20){
-					y = 20;
-				}else{
-					y+= -5;
-				}
-			
+				setyDirection(-1);
 			}
 			if(keyCode == e.VK_DOWN){
-				if(y >= 310){
-					y = 310;
-				}else{
-					y+= +5;
-				}
+				setyDirection(+1);
 			}				
 		}
 		public void keyReleased(KeyEvent e){
-			
+			int keyCode = e.getKeyCode();
+			if(keyCode == e.VK_LEFT){
+				setxDirection(0);	
+			}
+			if(keyCode == e.VK_RIGHT){
+				setxDirection(0);	
+			}
+			if(keyCode == e.VK_UP){
+				setyDirection(0);	
+			}
+			if(keyCode == e.VK_DOWN){
+				setyDirection(0);	
+			}
 		}
 	}
 	
@@ -111,8 +150,11 @@ public class JavaGame extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		new JavaGame();
+		//thread
+	 	Thread t1 = new Thread(new JavaGame());
+	 	t1.start();
 
 	}
+	
 
 }
