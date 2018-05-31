@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -21,6 +22,9 @@ public class JavaGame extends JFrame{
 	//create a buffer image & graphics
 	private Image dbImage;
 	private Graphics dbGraphics;
+	Image face;
+	
+	
 	//action listener on keyboard
 	public class AL extends KeyAdapter{
 		public void keyPressed(KeyEvent e){
@@ -36,8 +40,8 @@ public class JavaGame extends JFrame{
 				
 			}
 			if(keyCode == e.VK_RIGHT){
-				if(x >=230){
-					x = 230;
+				if(x >=310){
+					x = 310;
 				}else{
 					x+= +5;
 				}
@@ -52,26 +56,28 @@ public class JavaGame extends JFrame{
 			
 			}
 			if(keyCode == e.VK_DOWN){
-				if(y >= 230){
-					y = 230;
+				if(y >= 310){
+					y = 310;
 				}else{
 					y+= +5;
 				}
-			
-			}
-					
+			}				
 		}
 		public void keyReleased(KeyEvent e){
 			
 		}
-
 	}
+	
 	//constructor
 	public JavaGame() {
+		//load image set the path
+		ImageIcon imgIcon = new ImageIcon("C:/Users/simon_bens/workspace/GameHobby/src/com/sims/JavaHub/face.png");
+		face = imgIcon.getImage();
+		
 		//add key listener
 		addKeyListener(new AL());
 		setTitle("Java Game Engine");
-		setSize(250,250);
+		setSize(450,450);
 		setBackground(Color.CYAN);
 		setResizable(false);
 		setVisible(true);
@@ -96,16 +102,9 @@ public class JavaGame extends JFrame{
 	//add color to frame
 	// want do something on the screen call Graphics class
 	public void paintComponents(Graphics g){
-		//set font & color
-		//-> 3 parameters to Font object
-		//1. family of the font cf word
-		//2. style of the font
-		//3. the size
-		setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 30));
-		g.setColor(Color.DARK_GRAY); //set color text
-		g.drawString("My Funny Game", 10,80);
-		g.setColor(Color.red); //color of the ball
-		g.fillOval(x, y, 15, 15);
+		
+	//	g.setColor(Color.RED);
+		g.drawImage(face, x, y, this);
 		
 		//update the object graphic
 		repaint();
