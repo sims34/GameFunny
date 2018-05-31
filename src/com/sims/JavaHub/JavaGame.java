@@ -27,7 +27,7 @@ public class JavaGame extends JFrame implements Runnable{
 	Image face;
 	
 	//set run method for thread
-	//the speed of the main program
+	//the speed of the main program	
 	@Override
 	public void run() {
 		try {
@@ -140,7 +140,7 @@ public class JavaGame extends JFrame implements Runnable{
 	}
 	//add color to frame
 	// want do something on the screen call Graphics class
-	public void paintComponents(Graphics g){
+	public void paintComponent(Graphics g){
 		
 	//	g.setColor(Color.RED);
 		g.drawImage(face, x, y, this);
