@@ -35,10 +35,11 @@ public class JavaGame extends JFrame implements Runnable{
 			while(true){
 				//ask constantly to check the move() method
 				move();
+				System.out.println("move in action ...");
 				//ask to the run method to stop for millisecond
 				// it's kind of control of the speed compute of the program
 				// more > millisecond more the program is slow
-				Thread.sleep(100);
+				Thread.sleep(5);
 				
 			}
 		} catch (Exception e) {
@@ -110,7 +111,7 @@ public class JavaGame extends JFrame implements Runnable{
 	//constructor
 	public JavaGame() {
 		//load image set the path
-		ImageIcon imgIcon = new ImageIcon("C:/Users/simon_bens/workspace/GameHobby/src/com/sims/JavaHub/face.png");
+		ImageIcon imgIcon = new ImageIcon("C:/Users/simon_bens/git/GameFunny/src/com/sims/JavaHub/face.png");
 		face = imgIcon.getImage();
 		
 		//add key listener
@@ -118,9 +119,11 @@ public class JavaGame extends JFrame implements Runnable{
 		setTitle("Java Game Engine");
 		setSize(450,450);
 		setBackground(Color.CYAN);
+		System.out.println("Backgorond ...");
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		x = 150;
 		y = 150;
 	}
@@ -142,7 +145,7 @@ public class JavaGame extends JFrame implements Runnable{
 	// want do something on the screen call Graphics class
 	public void paintComponent(Graphics g){
 		
-	//	g.setColor(Color.RED);
+		//g.setColor(Color.RED);
 		g.drawImage(face, x, y, this);
 		
 		//update the object graphic
@@ -152,6 +155,7 @@ public class JavaGame extends JFrame implements Runnable{
 	public static void main(String[] args) {
 		//thread
 	 	Thread t1 = new Thread(new JavaGame());
+	 	System.out.println("thread works ....");
 	 	t1.start();
 
 	}
