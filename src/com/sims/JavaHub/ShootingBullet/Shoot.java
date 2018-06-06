@@ -36,20 +36,22 @@ public class Shoot extends JFrame{
 	}
 	public void paintComponents(Graphics g){
 		//method draw of the ship class
-		
+		myShip.draw(g);
+		repaint();
 	}
 	
 	public class AL extends KeyAdapter{
 		public void keyPressed(KeyEvent e){
-			
+			myShip.keyPressed(e);
 		}
 		public void keyReleased(KeyEvent e){
-			
+			myShip.keyReleased(e);
 		}
 	}
 	public static void main(String[] args) {
 		new Shoot();
-
+		Thread tShip = new Thread(myShip);
+		tShip.start();
 	}
 
 }
