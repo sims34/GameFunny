@@ -48,13 +48,17 @@ public class Ship implements Runnable{
 		if(keyCode == e.VK_RIGHT) setxDirection(1);
 		//attack bullet
 		if(keyCode == e.VK_SPACE){
-			if(bullet ==null) readyToFire =true;
-			if(readyToFire){
-				bulletX = x+18;
-				bulletY =  y-7;
-				bullet= new Rectangle(bulletX, bulletY, 3, 5);
-				shot = true;
-			}
+			readyToShootGunner();
+		}
+	}
+	
+	private void readyToShootGunner() {
+		if(bullet ==null) readyToFire =true;
+		if(readyToFire){
+			bulletX = x+18;
+			bulletY =  y-7;
+			bullet= new Rectangle(bulletX, bulletY, 3, 5);
+			shot = true;
 		}
 	}
 	public void keyReleased(KeyEvent e){
@@ -64,15 +68,18 @@ public class Ship implements Runnable{
 		if(keyCode == e.VK_RIGHT) setxDirection(0);
 		//attack bullet
 		if(keyCode == e.VK_SPACE){
-			readyToFire = false;
-			if(bullet.y <=-5){
-				bullet = new Rectangle(0, 0, 0, 0);
-				shot = false;
-				readyToFire = true;
-			}
+			stopToShootCunner();
 				
 			}
 		}
+	private void stopToShootCunner() {
+		readyToFire = false;
+		if(bullet.y <=-5){
+			bullet = new Rectangle(0, 0, 0, 0);
+			shot = false;
+			readyToFire = true;
+		}
+	}
 	public void gunner(){
 		if(shot) bullet.y --;
 	}
@@ -89,10 +96,7 @@ public class Ship implements Runnable{
 			System.out.println(e.getMessage());
 		}
 	}
-//	public static void main(String[] args) {
-//		
-//
-//	}
+
 
 	
 
